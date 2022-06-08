@@ -37,7 +37,7 @@ runs:
     - name: Install kubectl
       if: ${{ inputs.eks-cluster-name != 'UNASSIGNED' }}
       id: kubectl-install
-      uses: azure/setup-kubectl@v2.0
+      uses: azure/setup-kubectl@v2.1
       with:
         version: 'v1.23.6'
 
