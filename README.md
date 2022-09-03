@@ -37,6 +37,15 @@ jobs:
           aws-region: us-east-2
 
       # This action.
+      # - eks-namespace: optional. if set, initializes TUTOR_ID and TUTOR_K8S_NAMESPACE.
+      # - eks-cluster-name: optional. if set, runs aws eks update-kubeconfig
+      # - aws-region: optional, but needed for aws eks update-kubeconfig
+      # - tutor-version: optional. defaults to "latest"
       - name: Configure Github workflow environment
         uses: openedx-actions/tutor-k8s-init@v1.0.4
+        with:
+          eks-namespace: my-prod-namespace
+          eks-cluster-name: my-prod-cluster
+          aws-region: us-east-1
+          tutor-version: latest
 ```
