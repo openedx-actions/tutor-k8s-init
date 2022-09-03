@@ -15,7 +15,6 @@ This action was originally created for [Cookiecutter Tutor Open edX Production D
 
 ## Usage:
 
-
 ```yaml
 name: Example workflow
 
@@ -39,5 +38,5 @@ jobs:
 
       # This action.
       - name: Configure Github workflow environment
-        uses: openedx-actions/tutor-k8s-init@v1.0.3
+        uses: openedx-actions/tutor-k8s-init@v1.0.4
 ```
