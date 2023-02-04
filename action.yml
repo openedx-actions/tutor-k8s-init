@@ -59,7 +59,7 @@ runs:
       id: kubectl-configure
       shell: bash
       run: |-
-        sudo snap install kubectl --channel=1.23/stable --classic
+        sudo snap install kubectl --channel=1.24/stable --classic
         aws eks --region ${{ inputs.aws-region }} update-kubeconfig --name ${{ inputs.eks-cluster-name }} --alias ${{ inputs.eks-cluster-name }}
 
     - name: Check awscli version
@@ -105,6 +105,13 @@ runs:
         tutor config save
         echo "TUTOR_VERSION=$(tutor --version | cut -f3 -d' ')" >> $GITHUB_ENV
         echo tutor root: $(tutor config printroot)
+
+    - name: Install tutor-mfe
+      shell: bash
+      run: |-
+        pip install tutor-mfe
+        tutor plugins enable mfe
+        tutor config save
 
     - name: Load tutor settings
       shell: bash

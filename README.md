@@ -42,7 +42,7 @@ jobs:
       # - aws-region: optional, but needed for aws eks update-kubeconfig
       # - tutor-version: optional. defaults to "latest"
       - name: Configure Github workflow environment
-        uses: openedx-actions/tutor-k8s-init@v1.0.4
+        uses: openedx-actions/tutor-k8s-init@v1.0.5
         with:
           eks-namespace: my-prod-namespace
           eks-cluster-name: my-prod-cluster
