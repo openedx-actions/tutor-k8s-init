@@ -1,5 +1,16 @@
 # CHANGE LOG
 
+## Version 1.0.6 (2023-03-24)
+
+- bump kubectl to 1.25/stable
+- switch to installing yq with snap
+- switch to installing tutor[full] instead of solo
+
+## Version 1.0.5 (2023-02-04)
+
+- bump kubectl to version 1.24/stable
+- install and enable tutor-mfe plugin
+
 ## Version 1.0.4 (2022-09-03)
 
 - mask TUTOR_OPENEDX_MONGODB_PASSWORD
