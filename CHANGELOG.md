@@ -1,6 +1,14 @@
 # CHANGE LOG
 
+## Version 1.0.7 (2023-03-24)
+
+- bump kubectl to 1.25/stable
+- refactor yq installation
+- add a whoami step
+
 ## Version 1.0.6 (2023-03-24)
+
+THIS VERSION WAS YANKED.
 
 - bump kubectl to 1.25/stable
 - switch to installing yq with snap

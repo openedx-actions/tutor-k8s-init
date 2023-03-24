@@ -38,14 +38,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # replaces: sudo snap install kubectl --channel=1.23/stable --classic
-    #- name: Install kubectl
-    #  if: ${{ inputs.eks-cluster-name != 'UNASSIGNED' }}
-    #  id: kubectl-install
-    #  uses: azure/setup-kubectl@v2.1
-    #  with:
-    #    version: 'v1.23.6'
-
     # get the Kubernetes kubeconfig for our cluster. This is a prerequisite to getting any other   data about or contained within our cluster.
     # see: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/
     #
@@ -54,6 +46,13 @@ runs:
     #   - API server endpoint
     #   - EKS Cluster ARN
     #   - Certificate authority (ie the private ssh key)
+    - name: Who am i
+      shell: bash
+      run: |-
+        whoami
+        pwd
+        ls -lha
+
     - name: Configure kubectl
       if: ${{ inputs.eks-cluster-name != 'UNASSIGNED' }}
       id: kubectl-configure
@@ -61,6 +60,9 @@ runs:
       run: |-
         sudo snap install kubectl --channel=1.25/stable --classic
         aws eks --region ${{ inputs.aws-region }} update-kubeconfig --name ${{ inputs.eks-cluster-name }} --alias ${{ inputs.eks-cluster-name }}
+        echo "kubectl version and diagnostic info:"
+        echo "------------------------------------"
+        kubectl version --short --v=9
 
     - name: Check awscli version
       shell: bash
@@ -73,14 +75,6 @@ runs:
         echo "-------------"
         aws sts get-caller-identity
 
-    - name: Check kubectl version
-      if: ${{ inputs.eks-cluster-name != 'UNASSIGNED' }}
-      shell: bash
-      run: |-
-        echo "kubectl version and diagnostic info:"
-        echo "------------------------------------"
-        kubectl version --short --v=9
-
     # install the latest version of python3 which is a prerequisite for running Tutor
     - name: Install packages required by tutor
       shell: bash
@@ -91,7 +85,8 @@ runs:
     - name: Install yq
       shell: bash
       run: |-
-        sudo snap install yq
+        sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+        sudo chmod a+x /usr/local/bin/yq
         yq --version
 
     # install Tutor which we'll use for configuring and deploying Open edX
@@ -99,14 +94,17 @@ runs:
       shell: bash
       run: |-
         pip install --upgrade pyyaml
-        pip install tutor[full]${{ inputs.tutor-version != 'latest' && format('=={0}', inputs.tutor-version) || '' }}
+        pip install tutor${{ inputs.tutor-version != 'latest' && format('=={0}', inputs.tutor-version) || '' }}
         tutor config save
         echo "TUTOR_VERSION=$(tutor --version | cut -f3 -d' ')" >> $GITHUB_ENV
         echo tutor root: $(tutor config printroot)
 
+    # we need to install tutor-mfe separately in order to avoid contention
+    # with the tutor version. for now, we're deploying tutor-mfe latest
     - name: Enable tutor-mfe
       shell: bash
       run: |-
+        pip install tutor-mfe
         tutor plugins enable mfe
         tutor config save
 
