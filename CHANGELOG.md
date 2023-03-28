@@ -1,8 +1,13 @@
 # CHANGE LOG
 
+## Version 1.0.8 (2023-03-28)
+
+- add tutor-mfe-version
+
 ## Version 1.0.7 (2023-03-24)
 
 - bump kubectl to 1.25/stable
+- revert to installing tutor solo to avoid tutor-mfe image pull issues when not installing latest
 - refactor yq installation
 - add a whoami step
 

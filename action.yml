@@ -34,6 +34,11 @@ inputs:
     required: false
     default: latest
     type: string
+  tutor-mfe-version:
+    description: 'The version of tutor-mfe to install'
+    required: false
+    default: latest
+    type: string
 
 runs:
   using: "composite"
@@ -104,7 +109,7 @@ runs:
     - name: Enable tutor-mfe
       shell: bash
       run: |-
-        pip install tutor-mfe
+        pip install tutor-mfe${{ inputs.tutor-mfe-version != 'latest' && format('=={0}', inputs.tutor-mfe-version) || '' }}
         tutor plugins enable mfe
         tutor config save
 
