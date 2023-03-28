@@ -40,6 +40,7 @@ jobs:
       # - eks-namespace: optional. if set, initializes TUTOR_ID and TUTOR_K8S_NAMESPACE.
       # - eks-cluster-name: optional. if set, runs aws eks update-kubeconfig
       # - aws-region: optional, but needed for aws eks update-kubeconfig
+      # - kubectl-version: optional. defaults to 1.25
       # - tutor-version: optional. defaults to "latest"
       # - tutor-mfe-version: optional. defaults to "latest"
       - name: Configure Github workflow environment
@@ -48,6 +49,7 @@ jobs:
           eks-namespace: my-prod-namespace
           eks-cluster-name: my-prod-cluster
           aws-region: us-east-1
+          kubectl-version: "1.25"
           tutor-version: "14.2.3"
           tutor-mfe-version: "14.0.2"
 ```
