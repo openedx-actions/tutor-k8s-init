@@ -2,6 +2,7 @@
 
 ## Version 1.0.8 (2023-03-28)
 
+- add kubectl-version
 - add tutor-mfe-version
 
 ## Version 1.0.7 (2023-03-24)
