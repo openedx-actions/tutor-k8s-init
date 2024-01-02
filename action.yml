@@ -32,7 +32,7 @@ inputs:
   kubectl-version:
     description: 'The version of kubectl to install'
     required: false
-    default: "1.25"
+    default: "1.28"
     type: string
   tutor-version:
     description: 'The version of tutor to install'
@@ -72,7 +72,7 @@ runs:
         aws eks --region ${{ inputs.aws-region }} update-kubeconfig --name ${{ inputs.eks-cluster-name }} --alias ${{ inputs.eks-cluster-name }}
         echo "kubectl version and diagnostic info:"
         echo "------------------------------------"
-        kubectl version --short --v=9
+        kubectl version
 
     - name: Check awscli version
       shell: bash

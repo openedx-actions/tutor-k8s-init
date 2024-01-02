@@ -50,9 +50,9 @@ jobs:
           eks-namespace: my-prod-namespace
           eks-cluster-name: my-prod-cluster
           aws-region: us-east-1
-          kubectl-version: "1.25"
-          tutor-version: "14.2.3"
-          tutor-mfe-version: "14.0.2"
+          kubectl-version: "1.28"
+          tutor-version: "17.0.0"
+          tutor-mfe-version: "17.0.0"
 ```
 
 ## Contributing
